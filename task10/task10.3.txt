@@ -1,0 +1,45 @@
+using System;
+using System.Collections;
+
+class Product
+{
+    public string ProductName { get; set; }
+    public int ProductID { get; set; }
+    public double Price { get; set; }
+}
+
+class ProductStackDAL
+{
+    private Stack products = new Stack();
+
+    public bool PushProduct(Product p)
+    {
+        products.Push(p);
+        return true;
+    }
+
+    public bool PopProduct()
+    {
+        if (products.Count > 0)
+        {
+            products.Pop();
+            return true;
+        }
+        return false;
+    }
+
+    public double SearchProduct(int id)
+    {
+        foreach (Product p in products)
+        {
+            if (p.ProductID == id)
+                return p.Price;
+        }
+        return -1;
+    }
+
+    public Product[] GetAllProducts()
+    {
+        return (Product[])products.ToArray(typeof(Product));
+    }
+}
